@@ -7,11 +7,7 @@ const DataAdapter = require('./dataAdapters');
 const ReportSaver = require('./reportSaver');
 const {
   selectedDate,
-  currentRoom,
   children,
-  teachers,
-  totals,
-  rooms,
 } = require('./mockData'); // Mock for testing create flow. Remove after fetching real data
 
 class PDFManager {
@@ -23,11 +19,7 @@ class PDFManager {
     async generate(roomId, currentDate) {
       const payload = await timeoutPromise(1000, {
         selectedDate,
-        currentRoom,
         children,
-        teachers,
-        totals,
-        rooms,
       }); // remove and get real data with two params: roomId, currentDate.
 
       const dataForPDF = this.dataAdapter.init(payload).getParseData();
@@ -42,13 +34,10 @@ class PDFManager {
 
       // return this.reportSaver.save({ file, name: 'NameToFacePDF', type: 'pdf' });
 
-      const headerData = dataForPDF.headerData;
-      const totalData = dataForPDF.totalData;
-      const legendData = dataForPDF.legendData;
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
-      await page.setContent(commonPage(dataForPDF));
-      await page.pdf(config(headerData, totalData, legendData));
+      await page.setContent(commonPage(children));
+      await page.pdf(config);
       await browser.close();
     }
 }
