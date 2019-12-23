@@ -1,10 +1,8 @@
-const commonStyles = require('../utils/commonStyles');
 const { headerLogo } = require('../images');
 
 function headerPage() {
     return `
         <div class="header">
-            ${commonStyles}
             ${headerPage.styles}
             <div class="header_wrap">
                 <div>

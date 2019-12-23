@@ -1,16 +1,13 @@
 const childHistory = require('./childHistory');
 
-function commonPage({
-    legendData,
-    studentsData,
-}) {
+function commonPage(childData) {
     return `
         <html lang="en">
             <head>
                 <title>PDF report</title>
             </head>
             <body>
-                ${childHistory(studentsData, legendData)}
+                ${childHistory(childData)}
             </body>
         </html>
     `;

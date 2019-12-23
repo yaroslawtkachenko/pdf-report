@@ -1,8 +1,8 @@
-import moment from 'moment';
+const moment = require('moment');
 
-import parseJSON from '../utils/parseJSON';
+const { parseJSON } = require('../utils/parseJSON');
 
-export default function createChildHistory({
+function createChildHistory({
    childName,
    teacherName,
    type,
@@ -14,7 +14,7 @@ export default function createChildHistory({
             childName,
             teacherName,
             type,
-            payload: parseJSON(payload),
+            payload,
             time,
             childHistoryTypeEnum: {
                 kidMeals: 'Meals',
@@ -114,13 +114,10 @@ createChildHistory.protoGenerate = {
                         .map(file => (`
                             <div>
                               <div>${comment}</div>
-                              <img style="width: 90%; height: auto; objectFit: cove" src=${file.url} alt="child file"/>
+                              <img style="width: 264px; height: 264px; objectFit: cove" src=${file.url} alt="child file"/>
                             </div>
                         `));
                 }
-
-                const file = this.payload.files.filter(({ mimeType }) => mimeType === 'video/mp4')[0];
-
                 return `<div>Video</div>`;
             }
 
@@ -144,3 +141,5 @@ createChildHistory.protoGenerate = {
         }
     }
 };
+
+module.exports = createChildHistory;

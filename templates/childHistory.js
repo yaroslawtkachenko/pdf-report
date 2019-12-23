@@ -1,24 +1,35 @@
-function childHistory(studentsData) {
+const childHistoryCard = require('../templates/childHistoryCard');
+
+function childHistory(childHistoryData) {
     return `
-        <div>
+        <div class="childHistory_wrap">
             ${childHistory.styles}
+            ${childHistoryData.map((history, index) => childHistoryCard({
+                childName: history.name + history.lastName,
+                teacherName: history.teacherName,
+                type: history.type,
+                payload: history.payload,
+                time: history.createdAt,
+                index
+            })).join('')}
         </div>
     `;
 }
 
 childHistory.styles = `
     <style>
-        .primeRow > * {
-            font-weight: bold;
+        .childHistory_wrap {
+            border: 1px solid
+            display: grid;
+            page-break-inside: avoid;
         }
-        .timelinesContainer {
-          position: relative;
-          width: 100%;
-          height: 100%;
+        @media print  
+        {
+            div {
+                page-break-inside: avoid;
+            }
         }
     </style>
 `;
-
-
 
 module.exports = childHistory;

@@ -10,17 +10,15 @@ const css = cssb.join('');
 
 const config = {
     path: 'resultPDF/NameToFacePDF.pdf',
-    format: 'Tabloid',
+    format: 'Legal',
     printBackground: true,
     displayHeaderFooter: true,
-    landscape: true,
     headerTemplate: css + headerPage(),
     footerTemplate: css + footerPage(),
     margin: {
         top: "95px",
-        bottom: "220px",
+        bottom: "100px",
     },
-    scale: 2,
 };
 
 module.exports = {

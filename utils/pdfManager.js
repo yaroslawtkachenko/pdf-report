@@ -22,7 +22,7 @@ class PDFManager {
         children,
       }); // remove and get real data with two params: roomId, currentDate.
 
-      const dataForPDF = this.dataAdapter.init(payload).getParseData();
+      // const dataForPDF = this.dataAdapter.init(payload).getParseData();
 
       // let file = null;
       //
@@ -38,6 +38,7 @@ class PDFManager {
       const page = await browser.newPage();
       await page.setContent(commonPage(children));
       await page.pdf(config);
+      const a = commonPage(children);
       await browser.close();
     }
 }
