@@ -10,8 +10,7 @@ function childHistory(childHistoryData) {
                 type: history.type,
                 payload: history.payload,
                 time: history.createdAt,
-                index
-            })).join('')}
+            }, index)).join('')}
         </div>
     `;
 }
@@ -19,8 +18,6 @@ function childHistory(childHistoryData) {
 childHistory.styles = `
     <style>
         .childHistory_wrap {
-            border: 1px solid
-            display: grid;
             page-break-inside: avoid;
         }
         @media print  

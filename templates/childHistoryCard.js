@@ -4,11 +4,14 @@ function childHistoryCard(historyData, index) {
     const history = createChildHistory(historyData);
 
     return `
-      <div>
+      <div class="card_wrap">
         ${childHistoryCard.styles}
+        ${index !== 0 ? `<div class="card_separator"></div>` : ''}
         <div class="card_content">
-          <div class="card_content__icon">
-            ${history.getCurrentType()}
+          <div class="card_content__icon-wrap">
+              <div class="card_content__icon">
+                ${history.getIconByType()}
+              </div>
           </div>
 
           <div class="card_content__text">
@@ -16,11 +19,6 @@ function childHistoryCard(historyData, index) {
               ${history.getCurrentType()}
             </div>
             ${history.generatePayloadContent()}
-
-            <div class="card_content__teacherName">
-              <span>by </span>
-              <span>${history.getTeacherName()}</span>
-            </div>
           </div>
 
           <div class="card_content__time">
@@ -33,16 +31,28 @@ function childHistoryCard(historyData, index) {
 
 childHistoryCard.styles = `
   <style>
+    .card_wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: rgb(74, 74,74);
+    }
+    .card_separator {
+        width: 4px;
+        height: 30px;
+        background: rgb(241, 241,241);
+    }
     .card_content {
         display: flex;
+        width: 90%;
         border: 2px solid rgba(220,14,14,0.15);
         border-radius: 5px;
-        /*box-shadow: 0 0 5px 1px rgba(220,14,14,0.15);*/
-        margin: 0 20px 30px 20px;
+        margin: 0 20px;
         background: rgb(241, 241,241);
         min-height: 90px;
         align-items: center;
         justify-content: space-between;
+        padding: 15px;
     }
     .card_content__text {
         width: 65%;
@@ -55,9 +65,18 @@ childHistoryCard.styles = `
         font-size: 24px;
         font-weight: bold;
     }
-    .card_content__icon {
+    .card_content__icon-wrap {
         width: 14%;
-        text-align: center;
+        text-align: -webkit-center;
+    }
+    .card_content__icon {
+        background: rgb(246, 155, 174);
+        width: 48px;
+        height: 48px;
+        display: flex;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: space-around;
     }
     .card_content__time {
         width: 15%;

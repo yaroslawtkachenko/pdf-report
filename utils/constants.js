@@ -9,7 +9,7 @@ cssb.push('</style>');
 const css = cssb.join('');
 
 const config = {
-    path: 'resultPDF/NameToFacePDF.pdf',
+    path: 'resultPDF/childHistory.pdf',
     format: 'Legal',
     printBackground: true,
     displayHeaderFooter: true,

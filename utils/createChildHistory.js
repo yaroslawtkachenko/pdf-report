@@ -1,6 +1,7 @@
 const moment = require('moment');
 
 const { parseJSON } = require('../utils/parseJSON');
+const { childIcons } = require('../images');
 
 function createChildHistory({
    childName,
@@ -17,17 +18,31 @@ function createChildHistory({
             payload,
             time,
             childHistoryTypeEnum: {
-                kidMeals: 'Meals',
-                infantMeals: 'Meals',
-                customMeals: 'Meals',
+                kidMeals: 'Food',
+                infantMeals: 'Food',
+                customMeals: 'Food',
                 napsUp: 'Nap',
                 napsDown: 'Nap',
                 childCategories: 'Category',
                 childFiles: 'File',
-                childCheckedIn: 'Hello!',
+                childCheckedIn: 'Hooray!',
                 childCheckedOut: 'Goodbye!',
                 childMove: 'Move',
                 childCurriculum: 'Learning',
+                curriculumReminder: 'Reminder',
+            },
+            childHistoryIconsEnum: {
+                kidMeals: 'meals',
+                infantMeals: 'meals',
+                customMeals: 'meals',
+                napsUp: 'nap',
+                napsDown: 'nap',
+                childCategories: 'Category',
+                childFiles: 'photo',
+                childCheckedIn: 'hooray',
+                childCheckedOut: 'goodbye',
+                childMove: 'move',
+                childCurriculum: 'book',
                 curriculumReminder: 'Reminder',
             },
         },
@@ -36,14 +51,24 @@ function createChildHistory({
 }
 
 createChildHistory.protoGenerate = {
+    getIconByType: function getIconByType() {
+        return `<img
+            style="width: 40px; height: 40px; filter: invert(1); object-fit: cover"
+            src=${childIcons[this.childHistoryIconsEnum[this.type]]}
+            alt="child file"
+        />`
+    },
     getCurrentType: function getCurrentType() {
         return this.childHistoryTypeEnum[this.type] || '-';
     },
     getCurrentTime: function getCurrentTime() {
-        return moment(this.time).format('HH:mm a') || '-';
+        return `
+            <div>${moment(this.time).format('MM/DD/YY') || '-'}</div>
+            <div>${moment(this.time).format('HH:mm a') || '-'}</div>
+        `;
     },
     getTeacherName: function getTeacherName() {
-        return this.teacherName || '-';
+        return `<div>by ${this.teacherName}</div>` || '-';
     },
     generatePayloadContent: function generatePayloadContent() {
         if (!this.payload) return '-';
@@ -53,51 +78,75 @@ createChildHistory.protoGenerate = {
 
         switch (this.type) {
             case 'childCheckedIn':
-              return `${childrenName} arrived at school. ${comment}`;
+              return `
+                <div>${childrenName} arrived at school. ${comment}</div>
+                ${this.getTeacherName()}
+              `;
 
             case 'childCheckedOut':
-              return `${childrenName} left school. ${comment}`;
+              return `
+                <div>${childrenName} left school. ${comment}</div>
+                ${this.getTeacherName()}
+              `;
 
             case 'childMove': {
               const roomName = this.payload.roomName || '-';
-              return `${childrenName} moved to ${roomName}. ${comment}`;
+              return `
+                <div>${childrenName} moved to ${roomName}. ${comment}</div>
+                ${this.getTeacherName()}
+              `;
             }
 
             case 'napsDown':
               return this.payload.endTime
                   ? `
-                    ${childrenName} 
-                    began napping at 
-                    ${moment(this.payload.startTime).format('HH:mm a')}
-                    and woke up from a nap at
-                    ${moment(this.payload.endTime).format('HH:mm a')}
-                    ${comment}
+                    <div>
+                        ${childrenName} 
+                        began napping at 
+                        ${moment(this.payload.startTime).format('HH:mm a')}
+                        and woke up from a nap at
+                        ${moment(this.payload.endTime).format('HH:mm a')}
+                        ${comment}
+                    </div>
+                    ${this.getTeacherName()}
                   `
                   : `
-                    ${childrenName} 
-                    began napping at 
-                    ${moment(this.payload.startTime).format('HH:mm a')}. 
-                    ${comment}
+                    <div>
+                        ${childrenName} 
+                        began napping at 
+                        ${moment(this.payload.startTime).format('HH:mm a')}. 
+                        ${comment}
+                    </div>
+                    ${this.getTeacherName()}
                   `;
 
             case 'napsUp':
                 return this.payload.startTime
                     ? `
-                        ${childrenName} 
-                        began napping at 
-                        ${moment(this.payload.startTime).format('HH:mm a')} and 
-                        woke up from a nap at 
-                        ${moment(this.payload.endTime).format('HH:mm a')}
-                        ${this.payload.comment || ''}
+                        <div>
+                            ${childrenName} 
+                            began napping at 
+                            ${moment(this.payload.startTime).format('HH:mm a')} and 
+                            woke up from a nap at 
+                            ${moment(this.payload.endTime).format('HH:mm a')}
+                            ${this.payload.comment || ''}
+                        </div>
+                        ${this.getTeacherName()}
                     `
                     : `
-                        ${childrenName} 
-                        woke up from a nap at 
-                        ${moment(this.payload.startTime).format('HH:mm a')}. ${comment}
+                        <div>
+                            ${childrenName} 
+                            woke up from a nap at 
+                            ${moment(this.payload.startTime).format('HH:mm a')}. ${comment}
+                        </div>
+                        ${this.getTeacherName()}
                     `;
 
             case 'childCategories':
-                return `${this.payload.categoryName || ''}. ${comment}`;
+                return `
+                    <div>${this.payload.categoryName || ''}. ${comment}</div>
+                    ${this.getTeacherName()}
+                `;
 
             case 'childCurriculum':
                 return this.payload
@@ -114,7 +163,8 @@ createChildHistory.protoGenerate = {
                         .map(file => (`
                             <div>
                               <div>${comment}</div>
-                              <img style="width: 264px; height: 264px; objectFit: cove" src=${file.url} alt="child file"/>
+                              ${this.getTeacherName()}
+                              <img style="width: 264px; height: 264px; object-fit: cover" src=${file.url} alt="child file"/>
                             </div>
                         `));
                 }
@@ -122,7 +172,10 @@ createChildHistory.protoGenerate = {
             }
 
             case 'curriculumReminder':
-                return `${this.payload.reminder}. ${comment}`;
+                return `
+                    <div>${this.payload.reminder}. ${comment}</div>
+                    ${this.getTeacherName()}
+                `;
 
             case 'customMeals':
             case 'kidMeals': {
@@ -130,10 +183,13 @@ createChildHistory.protoGenerate = {
                 const foodType = this.payload.foodIntakeName || '-';
 
                 return `
-                  ${childrenName} 
-                  had ${dishes} 
-                  for ${foodType}. 
-                  ${comment}
+                  <div>
+                      ${childrenName} 
+                      had ${dishes} 
+                      for ${foodType}. 
+                      ${comment}
+                  </div>
+                  ${this.getTeacherName()}
                 `;
             }
             default:
