@@ -7,7 +7,7 @@ function childHistoryCard(historyData, index) {
       <div class="card_wrap">
         ${childHistoryCard.styles}
         ${index !== 0 ? `<div class="card_separator"></div>` : ''}
-        <div class="card_content">
+        <div class="card_content_wrap">
           <div class="card_content__icon-wrap">
               <div class="card_content__icon">
                 ${history.getIconByType()}
@@ -42,7 +42,7 @@ childHistoryCard.styles = `
         height: 30px;
         background: rgb(241, 241,241);
     }
-    .card_content {
+    .card_content_wrap {
         display: flex;
         width: 90%;
         border: 2px solid rgba(220,14,14,0.15);
@@ -56,7 +56,6 @@ childHistoryCard.styles = `
     }
     .card_content__text {
         width: 65%;
-        border-right: 2px solid;
         color: rgb(74, 74,74);
         font-size: 14px;
         font-weight: normal;
@@ -81,6 +80,8 @@ childHistoryCard.styles = `
     .card_content__time {
         width: 15%;
         text-align: center;
+        border-left: 2px solid;
+        height: 60px;
     }
   </style>
 `;

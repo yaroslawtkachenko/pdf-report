@@ -2,6 +2,7 @@ const moment = require('moment');
 
 const { parseJSON } = require('../utils/parseJSON');
 const { childIcons } = require('../images');
+const foodLine = require('../templates/foodLine');
 
 function createChildHistory({
    childName,
@@ -190,6 +191,9 @@ createChildHistory.protoGenerate = {
                       ${comment}
                   </div>
                   ${this.getTeacherName()}
+                  <div>
+                      ${this.payload.dish.map(d => foodLine(d))}
+                  </div>
                 `;
             }
             default:
