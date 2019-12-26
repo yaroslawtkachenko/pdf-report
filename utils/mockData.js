@@ -19,7 +19,7 @@ const children = [
             dish: [
                 {
                     name: "snack",
-                    volume: 4
+                    volume: 2
                 }
             ],
             updatedAt: "2019-08-14T12:19:36.022Z",

@@ -82,6 +82,9 @@ childHistoryCard.styles = `
         text-align: center;
         border-left: 2px solid;
         height: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
   </style>
 `;

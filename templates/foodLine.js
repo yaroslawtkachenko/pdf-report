@@ -1,23 +1,22 @@
 function foodLine(dish) {
     return `
-        ${foodLine.styles}
+        ${foodLine.styles(dish.volume)}
         <div class="foodLine_wrap flex">
             <div class="foodLine_name flex">
                 <div>${dish.name}</div>
                 <div class="foodLine_name_value">${dish.volume * 25}%</div>
             </div>
             <div class="foodLine_progress flex">
-                <div class="foodLine_progress_item"></div>
-                <div class="foodLine_progress_item"></div>
-                <div class="foodLine_progress_item"></div>
-                <div class="foodLine_progress_item"></div>
-                <div class="foodLine_progress_item"></div>
+                <div class="foodLine_progress_item" style="background: ${dish.volume >= 1 ? `rgb(239, 61, 111)` : 'gainsboro' }"></div>
+                <div class="foodLine_progress_item" style="background: ${dish.volume >= 2 ? `rgb(239, 61, 111)` : 'gainsboro' }"></div>
+                <div class="foodLine_progress_item" style="background: ${dish.volume >= 3 ? `rgb(239, 61, 111)` : 'gainsboro' }"></div>
+                <div class="foodLine_progress_item" style="background: ${dish.volume >= 4 ? `rgb(239, 61, 111)` : 'gainsboro' }"></div>
             </div>
         </div>
     `;
 }
 
-foodLine.styles = (number) = `
+foodLine.styles = (number) => (`
     <style>
         .flex {
             display: flex;
@@ -36,14 +35,14 @@ foodLine.styles = (number) = `
             font-size: 16px;
         }
         .foodLine_progress_item {
-            background: rgb(239, 61, 111);
+            background: gainsboro;
             width: 50px;
             height: 10px;
             border-left: 1px solid white;
         }
-        .foodLine_progress_item :nth-child(-n+${number}){
-            color: red;
-        }
+        // .foodLine_progress :nth-child(-n+${number}){
+        //     background: rgb(239, 61, 111);
+        // }
         .foodLine_progress :first-child {
             border-radius: 5px 0 0 5px;
         }
@@ -51,6 +50,6 @@ foodLine.styles = (number) = `
             border-radius: 0 5px 5px 0;
         }
     </style>
-`;
+`);
 
 module.exports = foodLine;
