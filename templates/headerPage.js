@@ -9,7 +9,9 @@ function headerPage() {
                     <img class="header_logo" src=${headerLogo} alt="logo"/>
                 </div>
                 <div class="header_titleWrap">
-                    <div class="header_title">AppleTree & Gilden Woods - Child History</div>
+                    <div class="header_title">Child History Report</div>
+                    <div class="header_title">AppleTree & Gilden Woods</div>
+                    <div class="header_title">John Smith 2019-12-21</div>
                 </div>
             </div>
         </div>
@@ -37,6 +39,7 @@ headerPage.styles = `
         .header_logo {
             width: 93px;
             height: 33px;
+            margin-left: 15px;
         }
         
         .header_title {

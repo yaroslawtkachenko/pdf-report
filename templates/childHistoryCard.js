@@ -45,7 +45,7 @@ childHistoryCard.styles = `
     .card_content_wrap {
         display: flex;
         width: 90%;
-        border: 2px solid rgba(220,14,14,0.15);
+        border: 2px solid rgba(220,14,14,0.37);
         border-radius: 5px;
         margin: 0 20px;
         background: rgb(241, 241,241);
@@ -80,7 +80,7 @@ childHistoryCard.styles = `
     .card_content__time {
         width: 15%;
         text-align: center;
-        border-left: 2px solid;
+        border-left: 2px solid rgba(74, 74,74, 0.75);
         height: 60px;
         display: flex;
         flex-direction: column;

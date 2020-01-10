@@ -1,6 +1,6 @@
 function foodLine(dish) {
     return `
-        ${foodLine.styles(dish.volume)}
+        ${foodLine.styles}
         <div class="foodLine_wrap flex">
             <div class="foodLine_name flex">
                 <div>${dish.name}</div>
@@ -16,7 +16,7 @@ function foodLine(dish) {
     `;
 }
 
-foodLine.styles = (number) => (`
+foodLine.styles = `
     <style>
         .flex {
             display: flex;
@@ -40,9 +40,6 @@ foodLine.styles = (number) => (`
             height: 10px;
             border-left: 1px solid white;
         }
-        // .foodLine_progress :nth-child(-n+${number}){
-        //     background: rgb(239, 61, 111);
-        // }
         .foodLine_progress :first-child {
             border-radius: 5px 0 0 5px;
         }
@@ -50,6 +47,6 @@ foodLine.styles = (number) => (`
             border-radius: 0 5px 5px 0;
         }
     </style>
-`);
+`;
 
 module.exports = foodLine;

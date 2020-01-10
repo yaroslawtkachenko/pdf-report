@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 const { parseJSON } = require('../utils/parseJSON');
-const { childIcons } = require('../images');
+const { childIcons, childMoodIcons } = require('../images');
 const foodLine = require('../templates/foodLine');
 
 function createChildHistory({
@@ -24,13 +24,17 @@ function createChildHistory({
                 customMeals: 'Food',
                 napsUp: 'Nap',
                 napsDown: 'Nap',
-                childCategories: 'Category',
+                childCategories: 'Mood',
                 childFiles: 'File',
                 childCheckedIn: 'Hooray!',
                 childCheckedOut: 'Goodbye!',
                 childMove: 'Move',
                 childCurriculum: 'Learning',
                 curriculumReminder: 'Reminder',
+            },
+            childHistoryContentEnum: {
+                image: 'Photo',
+                video: 'Video',
             },
             childHistoryIconsEnum: {
                 kidMeals: 'meals',
@@ -53,13 +57,19 @@ function createChildHistory({
 
 createChildHistory.protoGenerate = {
     getIconByType: function getIconByType() {
+        const icon = this.type === 'childCategories'
+            ? childMoodIcons[this.payload.categoryName.toLocaleLowerCase()]
+            : childIcons[this.childHistoryIconsEnum[this.type]];
         return `<img
             style="width: 40px; height: 40px; filter: invert(1); object-fit: cover"
-            src=${childIcons[this.childHistoryIconsEnum[this.type]]}
+            src=${icon}
             alt="child file"
         />`
     },
     getCurrentType: function getCurrentType() {
+        if (this.type === 'childFiles') {
+            return this.childHistoryContentEnum[this.payload.content] || '-';
+        }
         return this.childHistoryTypeEnum[this.type] || '-';
     },
     getCurrentTime: function getCurrentTime() {
@@ -158,18 +168,20 @@ createChildHistory.protoGenerate = {
                         ));
 
             case 'childFiles': {
-                if (this.payload.content === 'image') {
-                    const files = this.payload.files.map(({ url }) => ({ url }));
-                    return files
-                        .map(file => (`
-                            <div>
-                              <div>${comment}</div>
-                              ${this.getTeacherName()}
-                              <img style="width: 264px; height: 264px; object-fit: cover" src=${file.url} alt="child file"/>
-                            </div>
-                        `));
-                }
-                return `<div>Video</div>`;
+                const files = this.payload.files.map(({ url }) => ({ url }));
+                return files
+                    .map(file => (`
+                        <div>
+                          <div>${comment}</div>
+                          ${this.getTeacherName()}
+                          ${this.payload.content === 'image'
+                        ? `<img style="width: 264px; height: 264px; object-fit: cover" src=${file.url} alt="child file"/>`
+                        : `<div style="width: 264px; height: 170px; border: 1px solid rgba(74, 74,74, 0.75); border-radius: 5px; display: flex; justify-content: center; align-items: center;">
+                             <img style="width: 74px; height: 74px; object-fit: cover" src=${childIcons.play} alt="child file"/>
+                           </div>
+                        `}
+                        </div>
+                    `)).join('');
             }
 
             case 'curriculumReminder':

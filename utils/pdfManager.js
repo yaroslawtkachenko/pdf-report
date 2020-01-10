@@ -38,6 +38,7 @@ class PDFManager {
       const page = await browser.newPage();
       await page.setContent(commonPage(children));
       await page.pdf(config);
+      const a = commonPage(children);
       await browser.close();
     }
 }

@@ -16,7 +16,7 @@ const config = {
     headerTemplate: css + headerPage(),
     footerTemplate: css + footerPage(),
     margin: {
-        top: "95px",
+        top: "125px",
         bottom: "100px",
     },
 };
