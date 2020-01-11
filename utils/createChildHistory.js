@@ -57,9 +57,18 @@ function createChildHistory({
 
 createChildHistory.protoGenerate = {
     getIconByType: function getIconByType() {
-        const icon = this.type === 'childCategories'
-            ? childMoodIcons[this.payload.categoryName.toLocaleLowerCase()]
-            : childIcons[this.childHistoryIconsEnum[this.type]];
+        let icon = '';
+        switch (this.type) {
+            case 'childCategories':
+                icon = childMoodIcons[this.payload.categoryName.toLocaleLowerCase()];
+                break;
+            case 'childFiles':
+                icon = childIcons[this.payload.content];
+                break;
+            default:
+                icon = childIcons[this.childHistoryIconsEnum[this.type]];
+                break;
+        }
         return `<img
             style="width: 40px; height: 40px; filter: invert(1); object-fit: cover"
             src=${icon}

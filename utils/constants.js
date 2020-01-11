@@ -1,9 +1,10 @@
 const headerPage = require('../templates/headerPage');
 const footerPage = require('../templates/footerPage');
+const { clarikaRegular } = require('../fonts');
 
 let cssb = [];
 cssb.push('<style>');
-cssb.push('* { font-family: "DejaVu Serif" }');
+cssb.push(`@font-face { font-family: 'Clarika'; src: url(${clarikaRegular}) format('truetype'); font-weight: normal; font-style: normal; } * { font-family: 'Clarika'; }`);
 cssb.push('</style>');
 
 const css = cssb.join('');

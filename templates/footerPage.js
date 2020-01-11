@@ -32,13 +32,14 @@ footerPage.styles = `
         .footer_pages {
             font-size: 10px;
             font-weight: 100;
-            width: 80%;
+            width: 65%;
+            margin-left: 110px;
             text-align: center;
         }
         .footer_logo {
             width: 100px;
             height: 28px;
-            margin-right: 10px;
+            margin-right: 20px;
         }
     </style>
 `;
