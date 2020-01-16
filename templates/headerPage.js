@@ -11,7 +11,7 @@ function headerPage() {
                 <div class="header_titleWrap">
                     <div class="header_title">Child History Report</div>
                     <div class="header_title">AppleTree & Gilden Woods</div>
-                    <div class="header_title">John Smith 12/21/19</div>
+                    <div class="header_title">John Smith <span class="header_time">12/21/19</span></div>
                 </div>
             </div>
         </div>
@@ -28,6 +28,8 @@ headerPage.styles = `
         
         .header_titleWrap {
             width: 65%;
+            font-size: 16px;
+            font-weight: 800;
         }
         
         .header_wrap {
@@ -40,11 +42,6 @@ headerPage.styles = `
             width: 93px;
             height: 33px;
             margin-left: 15px;
-        }
-        
-        .header_title {
-            font-size: 16px;
-            font-weight: 800;
         }
         
         .header_subTitle {

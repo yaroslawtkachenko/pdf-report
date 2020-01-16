@@ -6,7 +6,6 @@ const currentRoom = {
 };
 
 const children = [
-
     {
         date: "2019-12-21",
         name: "John",

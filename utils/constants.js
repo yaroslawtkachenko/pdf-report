@@ -1,6 +1,6 @@
 const headerPage = require('../templates/headerPage');
 const footerPage = require('../templates/footerPage');
-const { clarikaRegular } = require('../fonts');
+const { clarikaRegular, robotoRegular } = require('../fonts');
 
 let cssb = [];
 cssb.push('<style>');
