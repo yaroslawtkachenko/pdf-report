@@ -1,4 +1,5 @@
 const { headerLogo } = require('../images');
+const { clarikaRegular, roboto } = require('../fonts');
 
 function headerPage() {
     return `
@@ -20,10 +21,27 @@ function headerPage() {
 
 headerPage.styles = `
     <style>
+        @font-face {
+            font-family: 'Clarika';
+            src: url(${clarikaRegular}) format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Roboto';
+            src: url(${roboto}) format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         .header {
             width: 100%;
             text-align: center;
             margin: 0 8px;
+            font-family: 'Clarika';
+        }
+        
+        .header_time {
+            font-family: 'Roboto', sans-serif;
         }
         
         .header_titleWrap {

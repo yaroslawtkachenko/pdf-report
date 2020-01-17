@@ -78,7 +78,7 @@ childHistoryCard.styles = `
         justify-content: space-around;
     }
     .card_content__time {
-        font-family: 'Roboto Regular';
+        font-family: 'Roboto', sans-serif;
         width: 15%;
         text-align: center;
         border-left: 2px solid rgba(74, 74,74, 0.75);

@@ -37,8 +37,8 @@ class PDFManager {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
       await page.setContent(commonPage(children));
-      await page.pdf(config);
       const a = commonPage(children);
+      await page.pdf(config);
       await browser.close();
     }
 }

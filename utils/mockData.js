@@ -22,7 +22,7 @@ const children = [
                 }
             ],
             updatedAt: "2019-08-14T12:19:36.022Z",
-            foodIntakeName: "AM Snack",
+            foodIntakeName: "AM Snack &",
             createdAt: "2019-08-14T12:19:36.022Z"
         },
     },

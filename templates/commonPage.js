@@ -1,5 +1,5 @@
 const childHistory = require('./childHistory');
-const { clarikaRegular, robotoRegular } = require('../fonts');
+const { clarikaRegular, roboto } = require('../fonts');
 
 function commonPage(childData) {
     return `
@@ -9,7 +9,13 @@ function commonPage(childData) {
                 <style>
                     @font-face {
                         font-family: 'Clarika';
-                        src: url(${clarikaRegular}) format('truetype'), url(${robotoRegular}) format('truetype');
+                        src: url(${clarikaRegular}) format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+                    @font-face {
+                        font-family: 'Roboto';
+                        src: url(${roboto}) format('truetype');
                         font-weight: normal;
                         font-style: normal;
                     }
