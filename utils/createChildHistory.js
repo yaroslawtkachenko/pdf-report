@@ -16,7 +16,7 @@ function createChildHistory({
             childName,
             teacherName,
             type,
-            payload,
+            payload: parseJSON(payload),
             time,
             childHistoryTypeEnum: {
                 kidMeals: 'Food',

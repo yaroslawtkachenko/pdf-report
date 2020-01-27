@@ -4,13 +4,13 @@ function childHistory(childHistoryData) {
     return `
         <div class="childHistory_wrap">
             ${childHistory.styles}
-            ${childHistoryData.map((history, index) => childHistoryCard({
-                childName: history.name + history.lastName,
-                teacherName: history.teacherName,
-                type: history.type,
-                payload: history.payload,
-                time: history.createdAt,
-            }, index)).join('')}
+            ${childHistoryData.events.length !== 0 ? childHistoryData.events.map((event, index) => childHistoryCard({
+                childName: childHistoryData.name + childHistoryData.lastName,
+                teacherName: event.teacherName,
+                type: event.type,
+                payload: event.payload,
+                time: event.createdAt,
+            }, index)).join('') : ''}
         </div>
     `;
 }
