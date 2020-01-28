@@ -53,8 +53,10 @@ class PDFManager {
 
       // return this.reportSaver.save({ file, name: 'NameToFacePDF', type: 'pdf' });
 
+        console.log(`${process.cwd()}/fonts/clarika_regular.otf`);
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
+      await page.addStyleTag({ url: "https://fonts.googleapis.com/css?family=Roboto&display=swap"});
       await page.setContent(commonPage(data));
       const a = commonPage(data);
       await page.pdf(config);

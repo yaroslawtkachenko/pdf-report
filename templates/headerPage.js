@@ -2,6 +2,7 @@ const { headerLogo } = require('../images');
 const { clarikaRegular, roboto } = require('../fonts');
 
 function headerPage() {
+    console.log(process.cwd());
     return `
         <div class="header">
             ${headerPage.styles}
@@ -21,17 +22,19 @@ function headerPage() {
 
 headerPage.styles = `
     <style>
-        @font-face {
-            font-family: 'Clarika';
-            src: url(${clarikaRegular}) format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Roboto';
-            src: url(${roboto}) format('truetype');
-            font-weight: normal;
-            font-style: normal;
+        @media print {
+            @font-face {
+                font-family: 'Clarika';
+                src: url(${clarikaRegular}) format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Roboto';
+                src: url(${roboto}) format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
         }
         .header {
             width: 100%;
