@@ -50,6 +50,26 @@ function createChildHistory({
                 childCurriculum: 'book',
                 curriculumReminder: 'Reminder',
             },
+            childCategoriesIconsEnum: {
+                Busy: 'busy',
+                Cuddly: 'cuddly',
+                Emotional: 'emotional',
+                Excited: 'excited',
+                Goofy: '',
+                Happy: 'happy',
+                Quiet: 'quiet',
+                Sad: 'sad',
+                Talkative: 'talkative',
+                Tired: 'tired',
+                Upset: 'upset',
+                Nap: 'nap',
+                'Blocks & Cars': 'blocks_cars',
+                'Busy/Playful': 'busy_playful',
+                Potty: 'diapers',
+                Manners: 'manners',
+                Sharing: 'sharing',
+                'Trouble Listening': 'trouble_listening',
+            }
         },
         createChildHistory.protoGenerate,
     );
@@ -59,9 +79,11 @@ createChildHistory.protoGenerate = {
     getIconByType: function getIconByType() {
         let icon = '';
         switch (this.type) {
-            case 'childCategories':
-                icon = childMoodIcons[this.payload.categoryName.toLocaleLowerCase()];
+            case 'childCategories': {
+                const categoryIconByName = this.childCategoriesIconsEnum[this.payload.categoryName];
+                icon = childMoodIcons[categoryIconByName];
                 break;
+            }
             case 'childFiles':
                 icon = childIcons[this.payload.content];
                 break;

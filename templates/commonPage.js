@@ -21,6 +21,7 @@ function commonPage(childData) {
                     }
                     body {
                       font-family: 'Clarika';
+                      min-height: 50px;
                     }
                 </style>
             </head>
