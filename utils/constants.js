@@ -17,7 +17,9 @@ const config = {
     footerTemplate: css + footerPage(),
     margin: {
         top: "125px",
-        bottom: "100px",
+        bottom: "120px",
+        right: "20px",
+        left: "20px",
     },
 };
 

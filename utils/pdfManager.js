@@ -235,8 +235,9 @@ class PDFManager {
       // return this.reportSaver.save({ file, name: 'NameToFacePDF', type: 'pdf' });
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
-        await page.setContent(commonPage(data));
-        const a = commonPage(data);
+        // await page.setContent(commonPage([{ name: 'name', sn: '9181000J61100011', location: { name: 'location '} }]));
+        await page.setContent(commonPage(new Array(20).fill({ name: 'name'.repeat(30), sn: '9181000J61100011', location: { name: 'location '} })));
+        const a = commonPage(new Array(50).fill({ name: 'name'.repeat(30), sn: '9181000J61100011', location: { name: 'location '} }));
         await page.pdf(config);
         await browser.close();
     }
